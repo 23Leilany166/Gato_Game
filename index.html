@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Descripción del proyecto">
+    <title>Proyecto - Implementación</title>
+    <style>
+         body {
+            background-color: #ecf0f1; /* Cambia el color de fondo de la página */
+            font-family: Arial, sans-serif;
+         }
+         .title {
+            text-align: center; /* Centra el texto */
+            color:#ff0000; /* Cambia el color del texto del título */
+            font-size: 2em; /* Aumenta el tamaño del texto */
+        }
+        h4 {
+            text-align: center; /* Centra el texto de los h4 */
+            color: #3916a0; /* Cambia el color del texto de los h4 */
+            font-size: 1.0em; /* Cambia el tamaño de la fuente de los h4 */
+            font-weight: bold; /* Cambia el grosor del texto de los h4 */
+            margin-bottom: 15px; /* Añade un margen inferior a los h4 */
+        }
+        
+        .inline {
+            display: inline;
+        }
+        .integrantes {
+            margin-top: 20px;
+        }
+        .implementacion {
+            margin-top: 30px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .imagen {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        <h3 class="title">3 EN LINEA(^(O.X)^)</h3>
+    </header>
+
+    <section class="integrantes">
+        <h4>Integrantes</h4>
+        <ul>
+            <li>Leilany Aislinn Sanchez Reyes</li>
+            <li>Nombre del Integrante 2</li>
+            <!-- Añade más integrantes según sea necesario -->
+        </ul>
+    </section>
+
+    <section class="implementacion">
+        <h4>Implementación</h4>
+        <p>El siguiente código en Python representa un juego de tres en raya (tic-tac-toe). A continuación se proporciona el código seguido de una explicación de cada parte:</p>
+        
+        <pre><code>class Botón:
+    def _init_(self, fila, columna):
+        self.fila = fila
+        self.columna = columna
+        self.estado = " "  # Inicialmente vacío
+
+    def clic(self, simbolo):
+        if su estado es " ":
+            su estado es simbolo
+            return True  # Jugada válida
+        return False  # Jugada inválida
+
+class Juego:
+    def _init_(self):
+        self.tablero es [[" " para cada _ en el rango(3)] para cada _ en el rango(3)]
+        su turno es "O"  # Empieza con "O"
+        su movimientos es 0  # Contador de movimientos
+
+    def iniciar_juego(self):
+        su tablero es [[" " para cada _ en el rango(3)] para cada _ en el rango(3)]
+        su turno es "O"
+        su movimientos es 0
+
+    def mostrar_tablero(self):
+        para fila en su tablero:
+            imprime("|".unir(fila))
+            imprime("-" * 5)
+
+    def realizar_jugada(self, fila, columna):
+        si su tablero[fila][columna] es " ":
+            su tablero[fila][columna] es su turno
+            su movimientos += 1
+            return True
+        return False
+
+    def verificar_ganador(self):
+        para i en el rango(3):
+            si la fila completa o la columna completa tienen el mismo símbolo no vacío
+                return True
+            si la diagonal principal o la diagonal secundaria tienen el mismo símbolo no vacío
+                return True
+        return False
+
+    def verificar_empate(self):
+        return su movimientos es 9  # 9 movimientos sin ganador
+
+    def cambiar_turno(self):
+        su turno es "X" si su turno actual es "O", de lo contrario "O"
+
+    def reiniciar_juego(self):
+        su iniciar_juego()  # Reinicia el juego
+
+
+class Jugador:
+    def _init_(self, nombre, simbolo):
+        su nombre es nombre
+        su simbolo es X o O
+
+# Inicializar el juego
+juego = Juego()
+juego.iniciar_juego()
+botones = [[Botón(fila, columna) para cada columna en el rango(3)] para cada fila en el rango(3)]
+
+# Bucle principal del juego
+while True:
+    su juego.mostrar_tablero()
+    su fila = int(entrada(f"Turno de {juego.turno}. Ingresa fila (0-2): "))
+    su columna = int(entrada(f"Ingresar columna (0-2): "))
+
+    # Intentar realizar la jugada
+    si su botones[fila][columna].clic(juego.turno):
+        si su juego.realizar_jugada(fila, columna):
+            si su juego.verificar_ganador():
+                su juego.mostrar_tablero()
+                imprimir(f"¡{juego.turno} ha ganado!")
+                romper
+            si su juego.verificar_empate():
+                su juego.mostrar_tablero()
+                imprimir("¡El juego es un empate!")
+                romper
+            su juego.cambiar_turno()
+        de lo contrario:
+            imprimir("Movimiento inválido, intenta de nuevo.")
+    de lo contrario:
+        imprimir("Movimiento inválido, esa celda ya está ocupada. Intenta de nuevo.")</code></pre>
+
+        <!-- Aquí puedes añadir la imagen -->
+        <div class="imagen">
+            <img src="imagen/gato.png" alt="El gato" width="300">
+        </div>
+    </section>
+
+    <section class="explicacion-codigo">
+        <h4>Explicación del Código</h4>
+        <p><strong>Clase <code>Botón</code>:</strong> Esta clase representa un botón en el tablero de juego de tres en raya. Cada botón tiene una fila, una columna y un estado inicial vacío. El método <code>clic</code> permite a un jugador marcar un botón con su símbolo (X o O) si el botón está vacío. Si se realiza un clic válido, el estado del botón cambia al símbolo del jugador, y el método devuelve <code>True</code>.</p>
+        
+        <p><strong>Clase <code>Juego</code>:</strong> Esta clase es la principal para gestionar la lógica del juego. Crea un tablero de 3x3 y maneja el flujo del juego, desde la verificación de ganadores hasta el cambio de turno y el reinicio del juego. Aquí están algunos de los métodos clave:</p>
+        <ul>
+            <li><code>iniciar_juego</code>: Inicializa o reinicia el tablero y establece los contadores y el turno inicial.</li>
+            <li><code>mostrar_tablero</code>: Imprime el estado actual del tablero en la consola.</li>
+            <li><code>realizar_jugada</code>: Actualiza el tablero con el movimiento del jugador si la celda está vacía.</li>
+            <li><code>verificar_ganador</code>: Revisa si hay una fila, columna o diagonal completa con el mismo símbolo.</li>
+            <li><code>verificar_empate</code>: Comprueba si todos los movimientos posibles han sido hechos sin que haya un ganador.</li>
+            <li><code>cambiar_turno</code>: Alterna el turno entre los jugadores X y O.</li>
+        </ul>
+
+        <p><strong>Clase <code>Jugador</code>:</strong> Esta clase define un jugador en el juego, con atributos como su nombre y el símbolo que utilizan (X o O).</p>
+        
+        <p><strong>Interacción con el Juego:</strong> El bucle principal del juego permite a los jugadores ingresar sus movimientos hasta que uno gane o se produzca un empate. Se muestra el tablero después de cada movimiento, y el juego se reinicia si se determina un ganador o un empate.</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
