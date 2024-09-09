@@ -9,7 +9,7 @@ def mostrar_tablero():
         dibujar_linea(ganador_linea)
 
 def comprobar_ganador():
-    # Comprobar filas y columnas
+    # Comprobando filas y columnas
     for i in range(3):
         if tablero[i][0] == tablero[i][1] == tablero[i][2] != " ":
             return tablero[i][0], [(i, 0), (i, 1), (i, 2)]
