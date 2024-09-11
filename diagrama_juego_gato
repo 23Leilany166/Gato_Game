@@ -1,0 +1,34 @@
+// Diagrama de Flujo del Juego del Gato
+digraph {
+	A [label=Inicio]
+	B [label="Inicializar Tablero"]
+	C [label="Definir Jugadores"]
+	D [label="Turno 0 a 8"]
+	E [label="Mostrar Tablero"]
+	F [label="Turno Jugador"]
+	G [label="Entrada Jugador"]
+	H [label="Realizar Movimiento"]
+	I [label="Comprobar Ganador"]
+	J [label="Hay Ganador?"]
+	K [label="Mostrar Ganador"]
+	L [label="Cambiar Turno"]
+	M [label="Fin?"]
+	N [label="Mostrar Empate"]
+	O [label=Fin]
+	A -> B
+	B -> C
+	C -> D
+	D -> E
+	E -> F
+	F -> G
+	G -> H
+	H -> I
+	I -> J
+	J -> K [label="Sí"]
+	J -> L [label=No]
+	K -> M
+	L -> M
+	M -> D [label=No]
+	M -> N [label="Sí"]
+	N -> O
+}

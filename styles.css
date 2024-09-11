@@ -1,0 +1,57 @@
+body {
+    background-color: #ecf0f1; /* Color de fondo de la página */
+    font-family: Arial, sans-serif;
+    margin: 0; /* Elimina márgenes predeterminados */
+    padding: 20px; /* Añade un poco de espacio interno */
+}
+header {
+    background-color: #502c46; /* Color de fondo del encabezado */
+    color: #ffffff; /* Color del texto del encabezado */
+    padding: 10px 0; /* Espaciado interno */
+    text-align: center; /* Centra el texto */
+}
+.title {
+    font-size: 2em; /* Tamaño del texto del título */
+}
+h4 {
+    text-align: center; /* Centra el texto de los h4 */
+    color: #2980b9; /* Color del texto de los h4 */
+    font-size: 1.5em; /* Tamaño de la fuente de los h4 */
+    font-weight: bold; /* Grosor del texto */
+    margin-bottom: 15px; /* Margen inferior a los h4 */
+}
+p {
+    text-align: justify; /* Justifica el texto de los párrafos */
+    color: #34495e; /* Color del texto de los párrafos */
+}
+.inline {
+    display: inline;
+}
+.integrantes {
+    margin-top: 20px;
+}
+.implementacion {
+    margin-top: 30px;
+}
+pre {
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+.imagen {
+    margin-top: 20px;
+    text-align: center;
+}
+button {
+    background-color: #27ae60; /* Color de fondo del botón */
+    color: white; /* Color del texto del botón */
+    border: none; /* Sin bordes */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px 20px; /* Espaciado interno */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    font-size: 1em; /* Tamaño de la fuente del botón */
+}
+button:hover {
+    background-color: #219653; /* Color de fondo al pasar el mouse */
+}
