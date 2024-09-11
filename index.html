@@ -5,65 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Descripción del proyecto">
     <title>Proyecto - Implementación</title>
-    <style>
-        body {
-            background-color: #ecf0f1; /* Color de fondo de la página */
-            font-family: Arial, sans-serif;
-            margin: 0; /* Elimina márgenes predeterminados */
-            padding: 20px; /* Añade un poco de espacio interno */
-        }
-        header {
-            background-color: #2c3e50; /* Color de fondo del encabezado */
-            color: #ffffff; /* Color del texto del encabezado */
-            padding: 10px 0; /* Espaciado interno */
-            text-align: center; /* Centra el texto */
-        }
-        .title {
-            font-size: 2em; /* Tamaño del texto del título */
-        }
-        h4 {
-            text-align: center; /* Centra el texto de los h4 */
-            color: #2980b9; /* Color del texto de los h4 */
-            font-size: 1.5em; /* Tamaño de la fuente de los h4 */
-            font-weight: bold; /* Grosor del texto */
-            margin-bottom: 15px; /* Margen inferior a los h4 */
-        }
-        p {
-            text-align: justify; /* Justifica el texto de los párrafos */
-            color: #34495e; /* Color del texto de los párrafos */
-        }
-        .inline {
-            display: inline;
-        }
-        .integrantes {
-            margin-top: 20px;
-        }
-        .implementacion {
-            margin-top: 30px;
-        }
-        pre {
-            background-color: #f4f4f4;
-            padding: 10px;
-            border-radius: 5px;
-            overflow-x: auto;
-        }
-        .imagen {
-            margin-top: 20px;
-            text-align: center;
-        }
-        button {
-            background-color: #27ae60; /* Color de fondo del botón */
-            color: white; /* Color del texto del botón */
-            border: none; /* Sin bordes */
-            border-radius: 5px; /* Bordes redondeados */
-            padding: 10px 20px; /* Espaciado interno */
-            cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-            font-size: 1em; /* Tamaño de la fuente del botón */
-        }
-        button:hover {
-            background-color: #219653; /* Color de fondo al pasar el mouse */
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
@@ -83,7 +25,10 @@
         <h4>Implementación</h4>
         <p>El siguiente código en Python representa un juego de tres en raya (tic-tac-toe). A continuación se proporciona el código seguido de una explicación de cada parte:</p>
         <a href="Juego_Gato.html">
-            <button>Ir a otra página</button>
+            <button>Ir a Codigo</button>
+        </a>
+        <a href="Diagrama.html">
+            <button>Ir a Pagina Diagrama</button>
         </a>
         <pre><code>classdef mostrar_tablero(tablero):
             for fila in tablero:
@@ -140,7 +85,6 @@
             juego_gato()
         </code></pre>
 
-        <!-- Aquí puedes añadir la imagen -->
         <div class="imagen">
             <img src="imagen/gato.png" alt="El gato" width="300">
         </div>
@@ -148,21 +92,28 @@
 
     <section class="explicacion-codigo">
         <h4>Explicación del Código</h4>
-        <p><strong>Clase <code>Botón</code>:</strong> Esta clase representa un botón en el tablero de juego de tres en raya. Cada botón tiene una fila, una columna y un estado inicial vacío. El método <code>clic</code> permite a un jugador marcar un botón con su símbolo (X o O) si el botón está vacío. Si se realiza un clic válido, el estado del botón cambia al símbolo del jugador, y el método devuelve <code>True</code>.</p>
+        <p><strong>Clase JuegoGato:</strong> Esta clase representa la lógica del juego de tres en raya. Se encarga de gestionar el estado del tablero, los jugadores, y las reglas del juego.</p>
         
-        <p><strong>Clase <code>Juego</code>:</strong> Esta clase es la principal para gestionar la lógica del juego. Crea un tablero de 3x3 y maneja el flujo del juego, desde la verificación de ganadores hasta el cambio de turno y el reinicio del juego. Aquí están algunos de los métodos clave:</p>
+        <p><strong>Atributos de la Clase:</strong></p>
         <ul>
-            <li>iniciar_juego: Inicializa o reinicia el tablero y establece los contadores y el turno inicial.</li>
-            <li><code>mostrar_tablero</code>: Imprime el estado actual del tablero en la consola.</li>
-            <li><code>realizar_jugada</code>: Actualiza el tablero con el movimiento del jugador si la celda está vacía.</li>
-            <li><code>verificar_ganador</code>: Revisa si hay una fila, columna o diagonal completa con el mismo símbolo.</li>
-            <li><code>verificar_empate</code>: Comprueba si todos los movimientos posibles han sido hechos sin que haya un ganador.</li>
-            <li><code>cambiar_turno</code>: Alterna el turno entre los jugadores X y O.</li>
+            <li>tablero: Un arreglo 3x3 que representa el estado del juego, inicialmente vacío.</li>
+            <li>jugadores: Una lista que contiene los símbolos de los dos jugadores ("X" y "O").</li>
+            <li>turno: Un entero que indica de quién es el turno actual.</li>
+            <li>ganador: Almacena el símbolo del jugador que gana, si hay uno.</li>
         </ul>
 
-        <p><strong>Clase <code>Jugador</code>:</strong> Esta clase define un jugador en el juego, con atributos como su nombre y el símbolo que utilizan (X o O).</p>
-        
-        <p><strong>Interacción con el Juego:</strong> El bucle principal del juego permite a los jugadores ingresar sus movimientos hasta que uno gane o se produzca un empate. Se muestra el tablero después de cada movimiento, y el juego se reinicia si se determina un ganador o un empate.</p>
+        <p><strong>Métodos Clave:</strong></p>
+        <ul>
+            <li>comprobar_ganador: Verifica si hay un ganador revisando filas, columnas y diagonales.</li>
+            <li>realizar_movimiento: Permite a un jugador marcar una celda en el tablero, si está vacía.</li>
+            <li>reiniciar_juego: Restablece el tablero y los estados del juego para iniciar una nueva partida.</li>
+        </ul>
+
+        <p><strong>Interacción con la Interfaz:</strong> El juego utiliza botones para que los jugadores realicen sus movimientos. Cada vez que un jugador hace un movimiento, se actualiza el tablero y se verifica si hay un ganador o un empate.</p>
+
+        <p><strong>Descripción General:</strong> El código implementa un juego de tres en raya en Python utilizando la biblioteca <code>tkinter</code> para la interfaz gráfica. Dos jugadores alternan turnos en un tablero de 3x3, con el objetivo de alinear tres de sus símbolos.</p>
+
+        <p><strong>Conclusión:</strong> Este código es una implementación básica pero funcional de un juego de tres en raya, que permite a dos jugadores interactuar a través de una interfaz gráfica. La lógica del juego está bien estructurada, facilitando su comprensión y mantenimiento.</p>
     </section>
 
 </body>
