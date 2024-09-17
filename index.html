@@ -24,12 +24,14 @@
     <section class="implementacion">
         <h4>Implementación</h4>
         <p>El siguiente código en Python representa un juego de tres en raya (tic-tac-toe). A continuación se proporciona el código seguido de una explicación de cada parte:</p>
-        <a href="Juego_Gato.html">
-            <button>Ir a Codigo</button>
-        </a>
-        <a href="Diagrama.html">
-            <button>Ir a Pagina Diagrama</button>
-        </a>
+        <div>
+            <a href="Juego_Gato.html">
+                <button>Ir a Código</button>
+            </a>
+            <a href="Diagrama.html">
+                <button>Ir a Página Diagrama</button>
+            </a>
+        </div>
         <pre><code>classdef mostrar_tablero(tablero):
             for fila in tablero:
                 print("|".join(fila))
@@ -86,35 +88,42 @@
         </code></pre>
 
         <div class="imagen">
-            <img src="imagen/gato.png" alt="El gato" width="300">
+            <img src="imagen/DiagramaGato.png" alt="Importaciones" width="300">
         </div>
     </section>
 
     <section class="explicacion-codigo">
+        <h4>Descripción General</h4>
+        <p>El código implementa un juego de tres en raya en Python utilizando la biblioteca <code>tkinter</code> para la interfaz gráfica. Dos jugadores alternan turnos en un tablero de 3x3, con el objetivo de alinear tres de sus símbolos. La lógica del juego está separada en la clase <strong>JuegoGato</strong>, que maneja el estado del juego, los movimientos y la detección de ganadores. Los jugadores interactúan con la interfaz gráfica, haciendo clic en los botones que representan las celdas del tablero.</p>
+
         <h4>Explicación del Código</h4>
-        <p><strong>Clase JuegoGato:</strong> Esta clase representa la lógica del juego de tres en raya. Se encarga de gestionar el estado del tablero, los jugadores, y las reglas del juego.</p>
+        <p><strong>Importaciones:</strong> Aquí se importan todas las clases y funciones de tkinter, así como las herramientas mejoradas de ttk, que permite crear botones y etiquetas con un diseño más moderno.</p>
+        <div class="imagen">
+            <img src="imagen/Importacion.png" alt="Importaciones" width="300">
+        </div>
+
+        <p><strong>Clase JuegoGato:</strong> Esta clase encapsula toda la lógica del juego de tres en raya. Se encarga de gestionar el estado del tablero, determinar cuándo un jugador ha ganado, alternar los turnos y permitir que se realicen movimientos válidos.</p>
         
-        <p><strong>Atributos de la Clase:</strong></p>
+        <h4>Atributos de la Clase</h4>
         <ul>
-            <li>tablero: Un arreglo 3x3 que representa el estado del juego, inicialmente vacío.</li>
-            <li>jugadores: Una lista que contiene los símbolos de los dos jugadores ("X" y "O").</li>
-            <li>turno: Un entero que indica de quién es el turno actual.</li>
-            <li>ganador: Almacena el símbolo del jugador que gana, si hay uno.</li>
+            <li><strong>tablero:</strong> Matriz de 3x3 representada como una lista de listas.</li>
+            <li><strong>jugadores:</strong> Lista que contiene los símbolos "X" y "O".</li>
+            <li><strong>turno:</strong> Indica de quién es el turno actual.</li>
+            <li><strong>ganador:</strong> Almacena el símbolo del jugador ganador, si existe.</li>
         </ul>
 
-        <p><strong>Métodos Clave:</strong></p>
+        <h4>Métodos Clave</h4>
         <ul>
-            <li>comprobar_ganador: Verifica si hay un ganador revisando filas, columnas y diagonales.</li>
-            <li>realizar_movimiento: Permite a un jugador marcar una celda en el tablero, si está vacía.</li>
-            <li>reiniciar_juego: Restablece el tablero y los estados del juego para iniciar una nueva partida.</li>
+            <li><strong>comprobar_ganador:</strong> Verifica si un jugador ha ganado.</li>
+            <li><strong>realizar_movimiento:</strong> Permite marcar una celda específica del tablero.</li>
+            <li><strong>reiniciar_juego:</strong> Restablece el estado del juego.</li>
         </ul>
 
-        <p><strong>Interacción con la Interfaz:</strong> El juego utiliza botones para que los jugadores realicen sus movimientos. Cada vez que un jugador hace un movimiento, se actualiza el tablero y se verifica si hay un ganador o un empate.</p>
-
-        <p><strong>Descripción General:</strong> El código implementa un juego de tres en raya en Python utilizando la biblioteca <code>tkinter</code> para la interfaz gráfica. Dos jugadores alternan turnos en un tablero de 3x3, con el objetivo de alinear tres de sus símbolos.</p>
-
-        <p><strong>Conclusión:</strong> Este código es una implementación básica pero funcional de un juego de tres en raya, que permite a dos jugadores interactuar a través de una interfaz gráfica. La lógica del juego está bien estructurada, facilitando su comprensión y mantenimiento.</p>
+        <h4>Interacción con la Interfaz</h4>
+        <p>El juego está diseñado para ser jugado en una interfaz gráfica creada con tkinter. La interfaz incluye botones que representan las celdas del tablero.</p>
+        
+        <h4>Conclusión</h4>
+        <p>Este código proporciona una implementación completa y funcional de un juego de tres en raya con interfaz gráfica. La lógica del juego está bien estructurada, facilitando su mantenimiento y expansión.</p>
     </section>
-
 </body>
 </html>
