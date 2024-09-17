@@ -23,7 +23,9 @@
 
     <section class="implementacion">
         <h4>Implementación</h4>
-        <p>El siguiente código en Python representa un juego de tres en raya (tic-tac-toe). A continuación se proporciona el código seguido de una explicación de cada parte:</p>
+        <p>
+            El siguiente código en Python representa un juego de tres en raya (tic-tac-toe). A continuación se proporciona el código seguido de una explicación de cada parte:
+        </p>
         <div>
             <a href="Juego_Gato.html">
                 <button>Ir a Código</button>
@@ -32,59 +34,60 @@
                 <button>Ir a Página Diagrama</button>
             </a>
         </div>
-        <pre><code>classdef mostrar_tablero(tablero):
-            for fila in tablero:
-                print("|".join(fila))
-                print("-" * 5)
-        
-        def comprobar_ganador(tablero):
-            # Comprobar filas y columnas
-            for i in range(3):
-                if tablero[i][0] == tablero[i][1] == tablero[i][2] != " ":
-                    return True
-                if tablero[0][i] == tablero[1][i] == tablero[2][i] != " ":
-                    return True
-            
-            # Comprobar diagonales
-            if tablero[0][0] == tablero[1][1] == tablero[2][2] != " ":
-                return True
-            if tablero[0][2] == tablero[1][1] == tablero[2][0] != " ":
-                return True
-            
-            return False
-        
-        def realizar_movimiento(tablero, fila, col, jugador):
-            if tablero[fila][col] == " ":
-                tablero[fila][col] = jugador
-                return True
-            return False
-        
-        def juego_gato():
-            tablero = [[" " for _ in range(3)] for _ in range(3)]
-            jugadores = ["X", "O"]
-            turno = 0
-            
-            for _ in range(9):
+        <pre><code>
+classdef mostrar_tablero(tablero):
+    for fila in tablero:
+        print("|".join(fila))
+        print("-" * 5)
+
+def comprobar_ganador(tablero):
+    # Comprobar filas y columnas
+    for i in range(3):
+        if tablero[i][0] == tablero[i][1] == tablero[i][2] != " ":
+            return True
+        if tablero[0][i] == tablero[1][i] == tablero[2][i] != " ":
+            return True
+
+    # Comprobar diagonales
+    if tablero[0][0] == tablero[1][1] == tablero[2][2] != " ":
+        return True
+    if tablero[0][2] == tablero[1][1] == tablero[2][0] != " ":
+        return True
+
+    return False
+
+def realizar_movimiento(tablero, fila, col, jugador):
+    if tablero[fila][col] == " ":
+        tablero[fila][col] = jugador
+        return True
+    return False
+
+def juego_gato():
+    tablero = [[" " for _ in range(3)] for _ in range(3)]
+    jugadores = ["X", "O"]
+    turno = 0
+
+    for _ in range(9):
+        mostrar_tablero(tablero)
+        jugador_actual = jugadores[turno % 2]
+        print(f"Turno del jugador {jugador_actual}. Elige fila y columna (0, 1 o 2):")
+        fila = int(input("Fila: "))
+        col = int(input("Columna: "))
+
+        if realizar_movimiento(tablero, fila, col, jugador_actual):
+            if comprobar_ganador(tablero):
                 mostrar_tablero(tablero)
-                jugador_actual = jugadores[turno % 2]
-                print(f"Turno del jugador {jugador_actual}. Elige fila y columna (0, 1 o 2):")
-                fila = int(input("Fila: "))
-                col = int(input("Columna: "))
-                
-                if realizar_movimiento(tablero, fila, col, jugador_actual):
-                    if comprobar_ganador(tablero):
-                        mostrar_tablero(tablero)
-                        print(f"¡El jugador {jugador_actual} gana!")
-                        return
-                    turno += 1
-                else:
-                    print("Movimiento inválido. Inténtalo de nuevo.")
-            
-            mostrar_tablero(tablero)
-            print("¡Es un empate!")
-        
-        if __name__ == "__main__":
-            juego_gato()
+                print(f"¡El jugador {jugador_actual} gana!")
+                return
+            turno += 1
+        else:
+            print("Movimiento inválido. Inténtalo de nuevo.")
+
+    mostrar_tablero(tablero)
+    print("¡Es un empate!")
+
+if __name__ == "__main__":
+    juego_gato()
         </code></pre>
 
         <div class="imagen">
@@ -94,36 +97,107 @@
 
     <section class="explicacion-codigo">
         <h4>Descripción General</h4>
-        <p>El código implementa un juego de tres en raya en Python utilizando la biblioteca <code>tkinter</code> para la interfaz gráfica. Dos jugadores alternan turnos en un tablero de 3x3, con el objetivo de alinear tres de sus símbolos. La lógica del juego está separada en la clase <strong>JuegoGato</strong>, que maneja el estado del juego, los movimientos y la detección de ganadores. Los jugadores interactúan con la interfaz gráfica, haciendo clic en los botones que representan las celdas del tablero.</p>
+        <p>
+            El código implementa un juego de tres en raya en Python utilizando la biblioteca <code>tkinter</code> para la interfaz gráfica. Dos jugadores alternan turnos en un tablero de 3x3, con el objetivo de alinear tres de sus símbolos.
+            La lógica del juego está separada en la clase <strong>JuegoGato</strong>, que maneja el estado del juego, los movimientos y la detección de ganadores. Los jugadores interactúan con la interfaz gráfica, haciendo clic en los botones que representan las celdas del tablero.
+        </p>
 
         <h4>Explicación del Código</h4>
-        <p><strong>Importaciones:</strong> Aquí se importan todas las clases y funciones de tkinter, así como las herramientas mejoradas de ttk, que permite crear botones y etiquetas con un diseño más moderno.</p>
+
+        <h5>Importaciones</h5>
+        <p>
+            <strong>Importaciones:</strong> Aquí se importan todas las clases y funciones de tkinter, así como las herramientas mejoradas de ttk, que permite crear botones y etiquetas con un diseño más moderno.
+        </p>
         <div class="imagen">
-            <img src="imagen/Importacion.png" alt="Importaciones" width="300">
+            <img src="imagen/Importacion.png" alt="El gato" width="300">
         </div>
+        <p><strong>from tkinter import *:</strong> Importa todos los componentes de tkinter.</p>
+        <p><strong>from tkinter import ttk:</strong> Importa los componentes mejorados de tkinter (con mejor apariencia y más opciones)</p>
 
-        <p><strong>Clase JuegoGato:</strong> Esta clase encapsula toda la lógica del juego de tres en raya. Se encarga de gestionar el estado del tablero, determinar cuándo un jugador ha ganado, alternar los turnos y permitir que se realicen movimientos válidos.</p>
-        
-        <h4>Atributos de la Clase</h4>
+        <h5>Clase JuegoGato</h5>
+        <p>
+            <strong>Clase JuegoGato:</strong> Esta clase encapsula toda la lógica del juego de tres en raya (Tic-Tac-Toe). Se encarga de gestionar el estado del tablero, determinar cuándo un jugador ha ganado, alternar los turnos entre los jugadores y permitir que se realicen movimientos válidos en el tablero.
+        </p>
+
+        <h5>Atributos de la Clase</h5>
         <ul>
-            <li><strong>tablero:</strong> Matriz de 3x3 representada como una lista de listas.</li>
-            <li><strong>jugadores:</strong> Lista que contiene los símbolos "X" y "O".</li>
-            <li><strong>turno:</strong> Indica de quién es el turno actual.</li>
-            <li><strong>ganador:</strong> Almacena el símbolo del jugador ganador, si existe.</li>
+            <li><strong>tablero:</strong> Es una matriz de 3x3 representada como una lista de listas. Inicialmente, todas las posiciones están vacías (marcadas como " "). Este arreglo se utiliza para almacenar los movimientos de los jugadores.</li>
+            <li><strong>jugadores:</strong> Es una lista que contiene los símbolos que representan a los jugadores: "X" y "O". Cada símbolo corresponde a un jugador, y los turnos se alternan usando estos valores.</li>
+            <li><strong>turno:</strong> Un entero que indica de quién es el turno actual. Es 0 cuando le toca al jugador "X" y 1 cuando le toca al jugador "O". Cada vez que se realiza un movimiento válido, el valor de este atributo se alterna entre 0 y 1.</li>
+            <li><strong>ganador:</strong> Almacena el símbolo del jugador ganador si ya hay uno. Si no hay ganador aún, su valor es None. Cuando se detecta un ganador, este atributo se actualiza con el símbolo del ganador (ya sea "X" o "O").</li>
         </ul>
 
-        <h4>Métodos Clave</h4>
+        <h5>Métodos Clave</h5>
         <ul>
-            <li><strong>comprobar_ganador:</strong> Verifica si un jugador ha ganado.</li>
-            <li><strong>realizar_movimiento:</strong> Permite marcar una celda específica del tablero.</li>
-            <li><strong>reiniciar_juego:</strong> Restablece el estado del juego.</li>
+            <li>
+                <strong>comprobar_ganador:</strong> Este método se encarga de verificar si uno de los jugadores ha ganado el juego. Examina todas las combinaciones ganadoras posibles: todas las filas, todas las columnas y las dos diagonales. Si encuentra que todos los valores en una de esas combinaciones son iguales (y no vacíos), retorna el símbolo del jugador ganador y la combinación ganadora.
+                <p>Método de ejecución: 
+                    <ol>
+                        <li>Genera una lista de todas las combinaciones ganadoras.</li>
+                        <li>Recorre cada combinación, verificando si todos los elementos en esa combinación son iguales y no vacíos.</li>
+                        <li>Si encuentra alguna combinación ganadora, retorna el símbolo del jugador ganador y la combinación ganadora.</li>
+                        <li>Si no hay ganador devuelve None.</li>
+                    </ol>
+                </p>
+            </li>
+            <li>
+                <strong>realizar_movimiento:</strong> Este método permite a un jugador marcar una celda específica del tablero (usando coordenadas de fila y columna). Solo se permite marcar una celda si está vacía. Si el movimiento es válido, actualiza el tablero con el símbolo del jugador correspondiente.
+                <p>Validación: Antes de actualizar el tablero, comprueba si la posición seleccionada está vacía (" "). Si está ocupada, no realiza ningún cambio y retorna False.</p>
+                <p>Alternancia de turnos: Después de cada movimiento válido, el turno se alterna al otro jugador.</p>
+            </li>
+            <li>
+                <strong>reiniciar_juego:</strong> Restablece el estado del juego para que pueda comenzar una nueva partida. Esto incluye:
+                <ol>
+                    <li>Vaciar tablero (lo vuelve a llenar con espacios vacíos).</li>
+                    <li>Restablecer el turno del jugador "X".</li>
+                    <li>Eliminar cualquier valor del atributo ganador.</li>
+                </ol>
+            </li>
         </ul>
 
-        <h4>Interacción con la Interfaz</h4>
-        <p>El juego está diseñado para ser jugado en una interfaz gráfica creada con tkinter. La interfaz incluye botones que representan las celdas del tablero.</p>
-        
+        <h5>Interacción con la Interfaz</h5>
+        <p>
+            <strong>Interacción con la Interfaz:</strong> El juego está diseñado para ser jugado en una interfaz gráfica creada con tkinter. La interfaz incluye botones que representan las celdas del tablero, los cuales permiten a los jugadores hacer clic en las celdas para realizar un movimiento.
+        </p>
+        <ol>
+            <li>
+                Actualizar tablero: Cada vez que un jugador hace un movimiento, el estado visual del tablero (es decir, el texto de los botones) se actualiza para reflejar los símbolos "X" u "O" en las celdas correspondientes.
+                <p>El método actualizar_tablero se encarga de esta tarea, actualizando los botones con los valores actuales del tablero.</p>
+            </li>
+            <li>
+                Verificación de ganadores o empate: 
+                <p>Después de cada movimiento, se llama al método comprobar_ganador para verificar si alguien ha ganado. Si hay un ganador, se deshabilitarán los botones para impedir movimientos.</p>
+                <p>En caso de que haya un empate (cuando todas las celdas están llenas y no hay ganador), también se deshabilitarán los botones y se anunciará un empate.</p>
+            </li>
+            <li>
+                Resaltar al ganador: 
+                <p>Si hay un ganador, el método resaltar_ganador mostrará el ganador.</p>
+            </li>
+            <li>
+                Reiniciar el juego: 
+                <p>Después de que el juego termina (ya sea por victoria o empate), se reinicia automáticamente tras un breve retraso de 2 segundos, permitiendo a los jugadores comenzar una nueva partida.</p>
+            </li>
+        </ol>
+
+        <h5>Uso de Lambda</h5>
+        <p>
+            <strong>Uso de lambda:</strong> La creación de los botones usa lambda para asociar las coordenadas del botón con el comando correcto. Esto asegura que al hacer clic en un botón, el movimiento se realice en la celda correcta del tablero.
+        </p>
+
+        <h5>Deshabilitar Botones</h5>
+        <p>
+            <strong>Deshabilitar botones:</strong> Una vez que se declara un ganador o un empate, todos los botones se deshabilitan para evitar más interacciones. Esto se hace utilizando el método deshabilitar_botones.
+        </p>
+
+        <h5>Variable StringVar</h5>
+        <p>
+            <strong>La variable StringVar</strong> se usa para controlar dinámicamente el mensaje que se muestra en la interfaz, como el turno actual o el resultado del juego.
+        </p>
+
         <h4>Conclusión</h4>
-        <p>Este código proporciona una implementación completa y funcional de un juego de tres en raya con interfaz gráfica. La lógica del juego está bien estructurada, facilitando su mantenimiento y expansión.</p>
+        <p>
+            <strong>Conclusión:</strong> Este código proporciona una implementación completa y funcional de un juego de tres en raya con interfaz gráfica. La lógica del juego está bien estructurada, facilitando su mantenimiento y expansión.
+        </p>
     </section>
 </body>
 </html>
