@@ -24,8 +24,114 @@
     <section class="implementacion">
         <h4>Implementación</h4>
         <p>
-            El siguiente código en Python representa un juego de tres en raya (tic-tac-toe). A continuación se proporciona el código seguido de una explicación de cada parte:
+            El siguiente código en Python representa un juego de tres en raya (tic-tac-toe). A continuación se proporciona el código:
         </p>
+        <pre><code>
+            from tkinter import * # Importa todos los componentes de tkinder
+            from tkinter import ttk # Importa los componentes mejorado de tkinder
+            
+            class JuegoGato:
+                def __init__(self):
+                    self.tablero = [[" " for _ in range(3)] for _ in range(3)]
+                    self.jugadores = ["X", "O"] 
+                    self.turno = 0 
+                    self.ganador = None 
+            
+                def comprobar_ganador(self):
+                    combinaciones = [ [(i, j) for j in range(3)] for i in range(3) ] + \
+                                     [ [(j, i) for j in range(3)] for i in range(3) ] + \
+                                     [ [(i, i) for i in range(3)], [(i, 2 - i) for i in range(3)] ]
+            
+                    for combinacion in combinaciones:
+                        valores = [self.tablero[i][j] for i, j in combinacion]
+                        if valores[0] != " " and all(v == valores[0] for v in valores):
+                            return valores[0], combinacion
+                    return None, []
+            
+                def realizar_movimiento(self, fila, col):
+                    if self.tablero[fila][col] == " ":
+                        self.tablero[fila][col] = self.jugadores[self.turno]
+                        return True
+                    return False
+            
+                def reiniciar_juego(self):
+                    self.tablero = [[" " for _ in range(3)] for _ in range(3)]
+                    self.turno = 0
+                    self.ganador = None
+            
+            def actualizar_tablero():
+                for i in range(3):
+                    for j in range(3):
+                        botones[i][j].config(text=juego.tablero[i][j])
+                if juego.ganador:
+                    resaltar_ganador(juego.ganador)
+            
+            def mover(fila, col):
+                if juego.realizar_movimiento(fila, col):
+                    ganador, combinacion = juego.comprobar_ganador()
+                    if ganador:
+                        juego.ganador = ganador
+                        mensaje.set(f"¡El jugador {ganador} gana!")
+                        deshabilitar_botones()
+                        root.after(2000, reiniciar)
+                    elif all(juego.tablero[i][j] != " " for i in range(3) for j in range(3)):
+                        mensaje.set("¡Es un empate!")
+                        deshabilitar_botones()
+                        root.after(2000, reiniciar)
+                    else:
+                        juego.turno = 1 - juego.turno
+                        mensaje.set(f"Turno del jugador {juego.jugadores[juego.turno]}")
+                    actualizar_tablero()
+            
+            def resaltar_ganador(combinacion):
+                for (i, j) in combinacion:
+                    botones[i][j].config(bg='yellow')
+            
+            def deshabilitar_botones():
+                for fila in botones:
+                    for boton in fila:
+                        boton.config(state=DISABLED)
+            
+            def reiniciar():
+                juego.reiniciar_juego()
+                mensaje.set("Turno del jugador X")
+                actualizar_tablero()
+                for fila in botones:
+                    for boton in fila:
+                        boton.config(state=NORMAL)
+            
+            root = Tk()
+            root.title("Juego del Gato")
+            
+            mainframe = ttk.Frame(root, padding="3 3 12 12")
+            mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
+            root.columnconfigure(0, weight=1)
+            root.rowconfigure(0, weight=1)
+            
+            mensaje = StringVar()
+            mensaje_label = ttk.Label(mainframe, textvariable=mensaje)
+            mensaje_label.grid(column=1, row=0, columnspan=3, sticky=(E, W))
+            
+            ttk.Label(mainframe, text="Selecciona una posición").grid(column=1, row=1, columnspan=3, sticky=E)
+            
+            botones = []
+            juego = JuegoGato()
+            
+            for i in range(3):
+                fila_botones = []
+                for j in range(3):
+                    btn = ttk.Button(mainframe, text=" ", command=lambda fila=i, col=j: mover(fila, col))
+                    btn.grid(column=j+1, row=i+2, sticky=W)
+                    fila_botones.append(btn)
+                botones.append(fila_botones)
+            
+            reiniciar()
+            
+            for child in mainframe.winfo_children(): 
+                child.grid_configure(padx=5, pady=5)
+            
+            root.mainloop()
+        </code></pre>
         <div>
             <a href="Juego_Gato.html">
                 <button>Ir a Código</button>
@@ -34,61 +140,6 @@
                 <button>Ir a Página Diagrama</button>
             </a>
         </div>
-        <pre><code>
-classdef mostrar_tablero(tablero):
-    for fila in tablero:
-        print("|".join(fila))
-        print("-" * 5)
-
-def comprobar_ganador(tablero):
-    # Comprobar filas y columnas
-    for i in range(3):
-        if tablero[i][0] == tablero[i][1] == tablero[i][2] != " ":
-            return True
-        if tablero[0][i] == tablero[1][i] == tablero[2][i] != " ":
-            return True
-
-    # Comprobar diagonales
-    if tablero[0][0] == tablero[1][1] == tablero[2][2] != " ":
-        return True
-    if tablero[0][2] == tablero[1][1] == tablero[2][0] != " ":
-        return True
-
-    return False
-
-def realizar_movimiento(tablero, fila, col, jugador):
-    if tablero[fila][col] == " ":
-        tablero[fila][col] = jugador
-        return True
-    return False
-
-def juego_gato():
-    tablero = [[" " for _ in range(3)] for _ in range(3)]
-    jugadores = ["X", "O"]
-    turno = 0
-
-    for _ in range(9):
-        mostrar_tablero(tablero)
-        jugador_actual = jugadores[turno % 2]
-        print(f"Turno del jugador {jugador_actual}. Elige fila y columna (0, 1 o 2):")
-        fila = int(input("Fila: "))
-        col = int(input("Columna: "))
-
-        if realizar_movimiento(tablero, fila, col, jugador_actual):
-            if comprobar_ganador(tablero):
-                mostrar_tablero(tablero)
-                print(f"¡El jugador {jugador_actual} gana!")
-                return
-            turno += 1
-        else:
-            print("Movimiento inválido. Inténtalo de nuevo.")
-
-    mostrar_tablero(tablero)
-    print("¡Es un empate!")
-
-if __name__ == "__main__":
-    juego_gato()
-        </code></pre>
 
         <div class="imagen">
             <img src="imagen/DiagramaGato.png" alt="Importaciones" width="300">
@@ -108,16 +159,16 @@ if __name__ == "__main__":
         <p>
             <strong>Importaciones:</strong> Aquí se importan todas las clases y funciones de tkinter, así como las herramientas mejoradas de ttk, que permite crear botones y etiquetas con un diseño más moderno.
         </p>
-        <div class="imagen">
-            <img src="imagen/Importacion.png" alt="El gato" width="300">
-        </div>
         <p><strong>from tkinter import *:</strong> Importa todos los componentes de tkinter.</p>
         <p><strong>from tkinter import ttk:</strong> Importa los componentes mejorados de tkinter (con mejor apariencia y más opciones)</p>
+       
 
         <h5>Clase JuegoGato</h5>
         <p>
-            <strong>Clase JuegoGato:</strong> Esta clase encapsula toda la lógica del juego de tres en raya (Tic-Tac-Toe). Se encarga de gestionar el estado del tablero, determinar cuándo un jugador ha ganado, alternar los turnos entre los jugadores y permitir que se realicen movimientos válidos en el tablero.
+            <strong>Clase JuegoGato:</strong> Esta clase guarda toda la lógica del juego de tres en raya (Tic-Tac-Toe). Se encarga de gestionar el estado del tablero, determinar cuándo un jugador ha ganado, alternar los turnos entre los jugadores y permitir que se realicen movimientos válidos en el tablero.
         </p>
+        <p><strong>Self:</strong>self permite a los métodos dentro de la clase acceder a los atributos y otros métodos del objeto. .</p>
+        <p><strong>método __init__:</strong>El método __init__ inicializa el tablero vacío, define los jugadores y establece el turno y el ganador.</p>
 
         <h5>Atributos de la Clase</h5>
         <ul>
@@ -194,9 +245,14 @@ if __name__ == "__main__":
             <strong>La variable StringVar</strong> se usa para controlar dinámicamente el mensaje que se muestra en la interfaz, como el turno actual o el resultado del juego.
         </p>
 
+        <h5>Bucle principal de la ventana:</h5>
+        <p>
+            <strong>root.mainloop()</strong> Inicia el bucle principal de la ventana, que mantiene abierta la interfaz hasta que el usuario la cierre.
+        </p>
+
         <h4>Conclusión</h4>
         <p>
-            <strong>Conclusión:</strong> Este código proporciona una implementación completa y funcional de un juego de tres en raya con interfaz gráfica. La lógica del juego está bien estructurada, facilitando su mantenimiento y expansión.
+            <strong>Conclusión:</strong> Este código proporciona una implementación completa y funcional de un juego de tres en raya con interfaz gráfica.
         </p>
     </section>
 </body>
