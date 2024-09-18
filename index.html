@@ -21,131 +21,6 @@
         </ul>
     </section>
 
-    <section class="implementacion">
-        <h4>Implementación</h4>
-        <p>
-            El siguiente código en Python representa un juego de tres en raya (tic-tac-toe). A continuación se proporciona el código:
-        </p>
-        <pre><code>
-            from tkinter import * # Importa todos los componentes de tkinder
-            from tkinter import ttk # Importa los componentes mejorado de tkinder
-            
-            class JuegoGato:
-                def __init__(self):
-                    self.tablero = [[" " for _ in range(3)] for _ in range(3)]
-                    self.jugadores = ["X", "O"] 
-                    self.turno = 0 
-                    self.ganador = None 
-            
-                def comprobar_ganador(self):
-                    combinaciones = [ [(i, j) for j in range(3)] for i in range(3) ] + \
-                                     [ [(j, i) for j in range(3)] for i in range(3) ] + \
-                                     [ [(i, i) for i in range(3)], [(i, 2 - i) for i in range(3)] ]
-            
-                    for combinacion in combinaciones:
-                        valores = [self.tablero[i][j] for i, j in combinacion]
-                        if valores[0] != " " and all(v == valores[0] for v in valores):
-                            return valores[0], combinacion
-                    return None, []
-            
-                def realizar_movimiento(self, fila, col):
-                    if self.tablero[fila][col] == " ":
-                        self.tablero[fila][col] = self.jugadores[self.turno]
-                        return True
-                    return False
-            
-                def reiniciar_juego(self):
-                    self.tablero = [[" " for _ in range(3)] for _ in range(3)]
-                    self.turno = 0
-                    self.ganador = None
-            
-            def actualizar_tablero():
-                for i in range(3):
-                    for j in range(3):
-                        botones[i][j].config(text=juego.tablero[i][j])
-                if juego.ganador:
-                    resaltar_ganador(juego.ganador)
-            
-            def mover(fila, col):
-                if juego.realizar_movimiento(fila, col):
-                    ganador, combinacion = juego.comprobar_ganador()
-                    if ganador:
-                        juego.ganador = ganador
-                        mensaje.set(f"¡El jugador {ganador} gana!")
-                        deshabilitar_botones()
-                        root.after(2000, reiniciar)
-                    elif all(juego.tablero[i][j] != " " for i in range(3) for j in range(3)):
-                        mensaje.set("¡Es un empate!")
-                        deshabilitar_botones()
-                        root.after(2000, reiniciar)
-                    else:
-                        juego.turno = 1 - juego.turno
-                        mensaje.set(f"Turno del jugador {juego.jugadores[juego.turno]}")
-                    actualizar_tablero()
-            
-            def resaltar_ganador(combinacion):
-                for (i, j) in combinacion:
-                    botones[i][j].config(bg='yellow')
-            
-            def deshabilitar_botones():
-                for fila in botones:
-                    for boton in fila:
-                        boton.config(state=DISABLED)
-            
-            def reiniciar():
-                juego.reiniciar_juego()
-                mensaje.set("Turno del jugador X")
-                actualizar_tablero()
-                for fila in botones:
-                    for boton in fila:
-                        boton.config(state=NORMAL)
-            
-            root = Tk()
-            root.title("Juego del Gato")
-            
-            mainframe = ttk.Frame(root, padding="3 3 12 12")
-            mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
-            root.columnconfigure(0, weight=1)
-            root.rowconfigure(0, weight=1)
-            
-            mensaje = StringVar()
-            mensaje_label = ttk.Label(mainframe, textvariable=mensaje)
-            mensaje_label.grid(column=1, row=0, columnspan=3, sticky=(E, W))
-            
-            ttk.Label(mainframe, text="Selecciona una posición").grid(column=1, row=1, columnspan=3, sticky=E)
-            
-            botones = []
-            juego = JuegoGato()
-            
-            for i in range(3):
-                fila_botones = []
-                for j in range(3):
-                    btn = ttk.Button(mainframe, text=" ", command=lambda fila=i, col=j: mover(fila, col))
-                    btn.grid(column=j+1, row=i+2, sticky=W)
-                    fila_botones.append(btn)
-                botones.append(fila_botones)
-            
-            reiniciar()
-            
-            for child in mainframe.winfo_children(): 
-                child.grid_configure(padx=5, pady=5)
-            
-            root.mainloop()
-        </code></pre>
-        <div>
-            <a href="Juego_Gato.html">
-                <button>Ir a Código</button>
-            </a>
-            <a href="Diagrama.html">
-                <button>Ir a Página Diagrama</button>
-            </a>
-        </div>
-
-        <div class="imagen">
-            <img src="imagen/DiagramaGato.png" alt="Importaciones" width="300">
-        </div>
-    </section>
-
     <section class="explicacion-codigo">
         <h4>Descripción General</h4>
         <p>
@@ -153,110 +28,134 @@
             La lógica del juego está separada en la clase <strong>JuegoGato</strong>, que maneja el estado del juego, los movimientos y la detección de ganadores. Los jugadores interactúan con la interfaz gráfica, haciendo clic en los botones que representan las celdas del tablero.
         </p>
 
-        <h4>Explicación del Código</h4>
-
-        <h5>Importaciones</h5>
+        <h4>Clase JuegoGato</h4>
         <p>
-        <strong>Importaciones:</strong> Aquí se importan todas las clases y funciones de tkinter, así como las herramientas mejoradas de ttk, que permite crear botones y etiquetas con un diseño más moderno.</p>
-        <p><strong>from tkinter import *:</strong> Importa todos los componentes de tkinter.</p>
-        <p><strong>from tkinter import ttk:</strong> Importa los componentes mejorados de tkinter (con mejor apariencia y más opciones)</p>
-       
-
-        <h5>Clase JuegoGato</h5>
-        <p>
-            <strong>Clase JuegoGato:</strong> Esta clase guarda toda la lógica del juego de tres en raya (Tic-Tac-Toe). Se encarga de gestionar el estado del tablero, determinar cuándo un jugador ha ganado, alternar los turnos entre los jugadores y permitir que se realicen movimientos válidos en el tablero.
+            La clase <strong>JuegoGato</strong> representa el juego de Tres en Raya, gestionando el estado del tablero, los jugadores, los turnos y la lógica para determinar ganadores y movimientos. 
+            Esta clase contiene métodos para inicializar el juego, realizar movimientos, comprobar si hay un ganador y reiniciar el juego. Facilita la interacción entre los jugadores y el tablero, asegurando que las reglas del juego se respeten.
         </p>
-        <p><strong>Self:</strong>self permite a los métodos dentro de la clase acceder a los atributos y otros métodos del objeto. .</p>
-        <p><strong>método __init__:</strong>El método __init__ inicializa el tablero vacío, define los jugadores y establece el turno y el ganador.</p>
 
-        <h5>Atributos de la Clase</h5>
+        <h5>Atributos de la clase</h5>
         <ul>
-            <li><strong>self.tablero::</strong> Es una matriz de 3x3 representada como una lista de listas. Inicialmente, todas las posiciones están vacías (marcadas como " "). Este arreglo se utiliza para almacenar los movimientos de los jugadores.</li>
-            <li><strong>self.jugadores: </strong> Es una lista que contiene los símbolos que representan a los jugadores: "X" y "O". Cada símbolo corresponde a un jugador, y los turnos se alternan usando estos valores.</li>
-            <li><strong>self.turno: </strong> Un entero que indica de quién es el turno actual. Es 0 cuando le toca al jugador "X" y 1 cuando le toca al jugador "O". Cada vez que se realiza un movimiento válido, el valor de este atributo se alterna entre 0 y 1.</li>
-            <li><strong>self.ganador:</strong> Almacena el símbolo del jugador ganador si ya hay uno. Si no hay ganador aún, su valor es None. Cuando se detecta un ganador, este atributo se actualiza con el símbolo del ganador (ya sea "X" o "O").</li>
-        </ul>
-
-        <h5>Métodos Clave</h5>
-        <ul>
-            <li>
-                <strong>comprobar_ganador:</strong> Este método se encarga de verificar si uno de los jugadores ha ganado el juego. Examina todas las combinaciones ganadoras posibles: todas las filas, todas las columnas y las dos diagonales. Si encuentra que todos los valores en una de esas combinaciones son iguales (y no vacíos), retorna el símbolo del jugador ganador y la combinación ganadora.
-                <p><strong>Método de ejecución: </strong>
-                    <ol>
-                        <li>Genera una lista de todas las combinaciones ganadoras.</li>
-                        <li>Recorre cada combinación, verificando si todos los elementos en esa combinación son iguales y no vacíos.</li>
-                        <li>Si encuentra alguna combinación ganadora, retorna el símbolo del jugador ganador y la combinación ganadora.</li>
-                        <li>Si no hay ganador devuelve None.</li>
-                    </ol>
-                </p>
+            <li><strong>tablero:</strong>
+                <ul>
+                    <li><strong>Tipo:</strong> <code>String[3][3]</code></li>
+                    <li><strong>Descripción:</strong> Matriz que representa el estado del juego. Cada celda puede contener:
+                        <ul>
+                            <li><code>" "</code> para vacío</li>
+                            <li><code>"X"</code> para el jugador 'X'</li>
+                            <li><code>"O"</code> para el jugador 'O'</li>
+                        </ul>
+                    </li>
+                </ul>
             </li>
-            <li>
-                <strong>realizar_movimiento:</strong> Este método permite a un jugador marcar una celda específica del tablero (usando coordenadas de fila y columna). Solo se permite marcar una celda si está vacía. Si el movimiento es válido, actualiza el tablero con el símbolo del jugador correspondiente.
-                <p><strong>Validacion</strong> Antes de actualizar el tablero, comprueba si la posición seleccionada está vacía (" "). Si está ocupada, no realiza ningún cambio y retorna False.</p>
-                <p> <strong>Alternacion de turnos:</strong> Después de cada movimiento válido, el turno se alterna al otro jugador.</p>
+            <li><strong>jugadores:</strong>
+                <ul>
+                    <li><strong>Tipo:</strong> <code>String[]</code></li>
+                    <li><strong>Descripción:</strong> Array que almacena los símbolos de los dos jugadores.</li>
+                </ul>
             </li>
-            <li>
-                <strong>reiniciar_juego:</strong> Restablece el estado del juego para que pueda comenzar una nueva partida. Esto incluye:
-                <ol>
-                    <li>Vaciar tablero (lo vuelve a llenar con espacios vacíos).</li>
-                    <li>Restablecer el turno del jugador "X".</li>
-                    <li>Eliminar cualquier valor del atributo ganador.</li>
-                </ol>
+            <li><strong>turno:</strong>
+                <ul>
+                    <li><strong>Tipo:</strong> <code>int</code></li>
+                    <li><strong>Descripción:</strong> Índice que indica de quién es el turno actual (0 para 'X', 1 para 'O').</li>
+                </ul>
+            </li>
+            <li><strong>ganador:</strong>
+                <ul>
+                    <li><strong>Tipo:</strong> <code>String</code> (o <code>null</code>)</li>
+                    <li><strong>Descripción:</strong> Almacena el valor del jugador ganador ("X" o "O") o <code>null</code> si no hay ganador.</li>
+                </ul>
             </li>
         </ul>
 
-        <h5><strong>interación con la Interfaz</strong></h5>
-        <p>
-            <strong>Interacción con la Interfaz:</strong> El juego está diseñado para ser jugado en una interfaz gráfica creada con tkinter. La interfaz incluye botones que representan las celdas del tablero, los cuales permiten a los jugadores hacer clic en las celdas para realizar un movimiento.
-        </p>
-        <ol>
-            <li>
-            <strong> Actualizar_tablero:</strong> Cada vez que un jugador hace un movimiento, el estado visual del tablero (es decir, el texto de los botones) se actualiza para reflejar los símbolos "X" u "O" en las celdas correspondientes.
-                <p><strong>El método actualizar_tablero:</strong>Se encarga de esta tarea, actualizando los botones con los valores actuales del tablero.</p>
-                <p> <strong>El método mover:</strong>Este método maneja el clic del jugador en una casilla. Realiza el movimiento, verifica si hay un ganador o empate, alterna el turno y actualiza el tablero en la interfaz.</p>
+        <h5>Métodos de la clase</h5>
+        <ul>
+            <li><strong>void __init__()</strong>
+                <ul>
+                    <li><strong>Descripción:</strong> Inicializa el juego, configurando el tablero a su estado inicial (todas las celdas vacías), reiniciando los jugadores y el turno.</li>
+                </ul>
             </li>
-            <li>
-            <strong> Verificación de ganadores o empate: </strong>
-                <p>Después de cada movimiento, se llama al método comprobar_ganador para verificar si alguien ha ganado. Si hay un ganador, se deshabilitarán los botones para impedir movimientos.</p>
-                <p>En caso de que haya un empate (cuando todas las celdas están llenas y no hay ganador), también se deshabilitarán los botones y se anunciará un empate.</p>
+            <li><strong>int, list comprobar_ganador()</strong>
+                <ul>
+                    <li><strong>Descripción:</strong> Verifica las combinaciones posibles en el tablero para determinar si hay un ganador. Retorna un array:
+                        <ul>
+                            <li><code>None</code> si no hay ganador</li>
+                            <li>La combinación ganadora si hay un ganador.</li>
+                        </ul>
+                    </li>
+                </ul>
             </li>
-            <li>
-            <strong>Resaltar al ganador: </strong>
-                <p>Si hay un ganador, el método resaltar_ganador mostrará el ganador.</p>
+            <li><strong>Boolean realizar_movimiento(int fila, int col)</strong>
+                <ul>
+                    <li><strong>Descripción:</strong> Intenta realizar un movimiento en la posición especificada del tablero.</li>
+                    <li><strong>Parámetros:</strong>
+                        <ul>
+                            <li><code>int fila</code>: la fila donde se quiere realizar el movimiento.</li>
+                            <li><code>int col</code>: la columna donde se quiere realizar el movimiento.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Retorno:</strong> <code>true</code> si el movimiento fue exitoso (la celda estaba vacía y se realizó el movimiento), <code>false</code> si no se pudo realizar (la celda ya estaba ocupada).</li>
+                </ul>
             </li>
-            <li>
-            <strong>Reiniciar el juego: </strong>
-                <p>Después de que el juego termina (ya sea por victoria o empate), se reinicia automáticamente tras un breve retraso de 2 segundos, permitiendo a los jugadores comenzar una nueva partida.</p>
+            <li><strong>void reiniciar_juego()</strong>
+                <ul>
+                    <li><strong>Descripción:</strong> Restablece el estado del juego a su configuración inicial, permitiendo comenzar una nueva partida.</li>
+                </ul>
             </li>
-        </ol>
+        </ul>
 
-        <h5>Uso de Lambda</h5>
-        <p>
-            <strong>Uso de lambda:</strong> La creación de los botones usa lambda para asociar las coordenadas del botón con el comando correcto. Esto asegura que al hacer clic en un botón, el movimiento se realice en la celda correcta del tablero.
-        </p>
+        <h5>Tipos de valores en los métodos</h5>
+        <ul>
+            <li><code>__init__()</code>: <code>void</code></li>
+            <li><code>comprobar_ganador()</code>: <code>(String, List)</code></li>
+            <li><code>realizar_movimiento(fila, col)</code>: <code>boolean</code></li>
+            <li><code>reiniciar_juego()</code>: <code>void</code></li>
+        </ul>
 
-        <h5>Deshabilitar Botones</h5>
+        <h5>Interfaz</h5>
         <p>
-            <strong>Deshabilitar botones:</strong> Una vez que se declara un ganador o un empate, todos los botones se deshabilitan para evitar más interacciones. Esto se hace utilizando el método deshabilitar_botones.
+            Si la clase <strong>JuegoGato</strong> implementa una interfaz, podría incluir métodos como:
         </p>
+        <ul>
+            <li><strong>void actualizar_tablero()</strong>
+                <ul>
+                    <li><strong>Descripción:</strong> Actualiza el texto de los botones en la interfaz gráfica para reflejar el estado actual del tablero, mostrando los símbolos de los jugadores en las posiciones correspondientes.</li>
+                </ul>
+            </li>
+            <li><strong>Void realizar_movimiento(fila, col)</strong>
+                <ul>
+                    <li><strong>Descripción:</strong> Intenta realizar un movimiento en la posición especificada del tablero. Retorna <code>true</code> si el movimiento fue exitoso (la celda estaba vacía) o <code>false</code> si no se pudo realizar (la celda ya estaba ocupada).</li>
+                </ul>
+            </li>
+            <li><strong>void reiniciar_juego()</strong>
+                <ul>
+                    <li><strong>Descripción:</strong> Reinicia el estado del juego, restableciendo el tablero a un estado vacío, configurando el turno al jugador 'X' y estableciendo que no hay ganador.</li>
+                </ul>
+            </li>
+            <li><strong>void resaltar_ganador(combinacion)</strong>
+                <ul>
+                    <li><strong>Descripción:</strong> Resalta la combinación ganadora en el tablero cambiando el color de fondo de los botones a amarillo.</li>
+                </ul>
+            </li>
+            <li><strong>void deshabilitar_botones()</strong>
+                <ul>
+                    <li><strong>Descripción:</strong> Deshabilita todos los botones del tablero para evitar movimientos adicionales una vez que el juego ha terminado.</li>
+                </ul>
+            </li>
+            <li><strong>void reiniciar()</strong>
+                <ul>
+                    <li><strong>Descripción:</strong> Reinicia el juego, restableciendo el estado del tablero y configurando el turno al jugador 'X'. También habilita los botones para permitir nuevas jugadas.</li>
+                </ul>
+            </li>
+        </ul>
 
-        <h5>Variable StringVar</h5>
-        <p>
-            <strong>La variable StringVar</strong> se usa para controlar dinámicamente el mensaje que se muestra en la interfaz, como el turno actual o el resultado del juego.
-        </p>
-
-        <h5>Bucle principal de la ventana:</h5>
-        <p>
-            <strong>root.mainloop()</strong> Inicia el bucle principal de la ventana, que mantiene abierta la interfaz hasta que el usuario la cierre.
-        </p>
-        <h4>Interfaz</h4>
-        <div class="imagen"></div>
-            <img src="imagen/Interfaz.png" alt="Importaciones" width="300">
+        <div class="imagen">
+            <img src="imagen/DiagramaGato.png" alt="Importaciones" width="300">
         </div>
-        
+
         <h4>Conclusión</h4>
         <p>
-            <strong>Conclusión:</strong> Este código proporciona una implementación completa y funcional de un juego de tres en raya con interfaz gráfica.
+            Este diseño proporciona una estructura clara y funcional para el juego, facilitando su implementación y uso. Este código proporciona una implementación completa y funcional de un juego de tres en raya con interfaz gráfica.
         </p>
     </section>
 </body>
