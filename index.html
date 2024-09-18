@@ -157,8 +157,7 @@
 
         <h5>Importaciones</h5>
         <p>
-            <strong>Importaciones:</strong> Aquí se importan todas las clases y funciones de tkinter, así como las herramientas mejoradas de ttk, que permite crear botones y etiquetas con un diseño más moderno.
-        </p>
+        <strong>Importaciones:</strong> Aquí se importan todas las clases y funciones de tkinter, así como las herramientas mejoradas de ttk, que permite crear botones y etiquetas con un diseño más moderno.</p>
         <p><strong>from tkinter import *:</strong> Importa todos los componentes de tkinter.</p>
         <p><strong>from tkinter import ttk:</strong> Importa los componentes mejorados de tkinter (con mejor apariencia y más opciones)</p>
        
@@ -182,7 +181,7 @@
         <ul>
             <li>
                 <strong>comprobar_ganador:</strong> Este método se encarga de verificar si uno de los jugadores ha ganado el juego. Examina todas las combinaciones ganadoras posibles: todas las filas, todas las columnas y las dos diagonales. Si encuentra que todos los valores en una de esas combinaciones son iguales (y no vacíos), retorna el símbolo del jugador ganador y la combinación ganadora.
-                <p>Método de ejecución: 
+                <p><strong>Método de ejecución: </strong>
                     <ol>
                         <li>Genera una lista de todas las combinaciones ganadoras.</li>
                         <li>Recorre cada combinación, verificando si todos los elementos en esa combinación son iguales y no vacíos.</li>
@@ -193,8 +192,8 @@
             </li>
             <li>
                 <strong>realizar_movimiento:</strong> Este método permite a un jugador marcar una celda específica del tablero (usando coordenadas de fila y columna). Solo se permite marcar una celda si está vacía. Si el movimiento es válido, actualiza el tablero con el símbolo del jugador correspondiente.
-                <p>Validación: Antes de actualizar el tablero, comprueba si la posición seleccionada está vacía (" "). Si está ocupada, no realiza ningún cambio y retorna False.</p>
-                <p>Alternancia de turnos: Después de cada movimiento válido, el turno se alterna al otro jugador.</p>
+                <p><strong>Validacion</strong> Antes de actualizar el tablero, comprueba si la posición seleccionada está vacía (" "). Si está ocupada, no realiza ningún cambio y retorna False.</p>
+                <p> <strong>Alternacion de turnos:</strong> Después de cada movimiento válido, el turno se alterna al otro jugador.</p>
             </li>
             <li>
                 <strong>reiniciar_juego:</strong> Restablece el estado del juego para que pueda comenzar una nueva partida. Esto incluye:
@@ -206,26 +205,26 @@
             </li>
         </ul>
 
-        <h5>Interacción con la Interfaz</h5>
+        <h5><strong>interación con la Interfaz</strong></h5>
         <p>
             <strong>Interacción con la Interfaz:</strong> El juego está diseñado para ser jugado en una interfaz gráfica creada con tkinter. La interfaz incluye botones que representan las celdas del tablero, los cuales permiten a los jugadores hacer clic en las celdas para realizar un movimiento.
         </p>
         <ol>
             <li>
-                Actualizar tablero: Cada vez que un jugador hace un movimiento, el estado visual del tablero (es decir, el texto de los botones) se actualiza para reflejar los símbolos "X" u "O" en las celdas correspondientes.
+            <strong> Actualizar tablero:</strong> Cada vez que un jugador hace un movimiento, el estado visual del tablero (es decir, el texto de los botones) se actualiza para reflejar los símbolos "X" u "O" en las celdas correspondientes.
                 <p>El método actualizar_tablero se encarga de esta tarea, actualizando los botones con los valores actuales del tablero.</p>
             </li>
             <li>
-                Verificación de ganadores o empate: 
+            <strong> Verificación de ganadores o empate: </strong>
                 <p>Después de cada movimiento, se llama al método comprobar_ganador para verificar si alguien ha ganado. Si hay un ganador, se deshabilitarán los botones para impedir movimientos.</p>
                 <p>En caso de que haya un empate (cuando todas las celdas están llenas y no hay ganador), también se deshabilitarán los botones y se anunciará un empate.</p>
             </li>
             <li>
-                Resaltar al ganador: 
+            <strong>Resaltar al ganador: </strong>
                 <p>Si hay un ganador, el método resaltar_ganador mostrará el ganador.</p>
             </li>
             <li>
-                Reiniciar el juego: 
+            <strong>Reiniciar el juego: </strong>
                 <p>Después de que el juego termina (ya sea por victoria o empate), se reinicia automáticamente tras un breve retraso de 2 segundos, permitiendo a los jugadores comenzar una nueva partida.</p>
             </li>
         </ol>
@@ -249,7 +248,7 @@
         <p>
             <strong>root.mainloop()</strong> Inicia el bucle principal de la ventana, que mantiene abierta la interfaz hasta que el usuario la cierre.
         </p>
-
+        
         <h4>Conclusión</h4>
         <p>
             <strong>Conclusión:</strong> Este código proporciona una implementación completa y funcional de un juego de tres en raya con interfaz gráfica.
