@@ -171,10 +171,10 @@
 
         <h5>Atributos de la Clase</h5>
         <ul>
-            <li><strong>tablero:</strong> Es una matriz de 3x3 representada como una lista de listas. Inicialmente, todas las posiciones están vacías (marcadas como " "). Este arreglo se utiliza para almacenar los movimientos de los jugadores.</li>
-            <li><strong>jugadores:</strong> Es una lista que contiene los símbolos que representan a los jugadores: "X" y "O". Cada símbolo corresponde a un jugador, y los turnos se alternan usando estos valores.</li>
-            <li><strong>turno:</strong> Un entero que indica de quién es el turno actual. Es 0 cuando le toca al jugador "X" y 1 cuando le toca al jugador "O". Cada vez que se realiza un movimiento válido, el valor de este atributo se alterna entre 0 y 1.</li>
-            <li><strong>ganador:</strong> Almacena el símbolo del jugador ganador si ya hay uno. Si no hay ganador aún, su valor es None. Cuando se detecta un ganador, este atributo se actualiza con el símbolo del ganador (ya sea "X" o "O").</li>
+            <li><strong>self.tablero::</strong> Es una matriz de 3x3 representada como una lista de listas. Inicialmente, todas las posiciones están vacías (marcadas como " "). Este arreglo se utiliza para almacenar los movimientos de los jugadores.</li>
+            <li><strong>self.jugadores: </strong> Es una lista que contiene los símbolos que representan a los jugadores: "X" y "O". Cada símbolo corresponde a un jugador, y los turnos se alternan usando estos valores.</li>
+            <li><strong>self.turno: </strong> Un entero que indica de quién es el turno actual. Es 0 cuando le toca al jugador "X" y 1 cuando le toca al jugador "O". Cada vez que se realiza un movimiento válido, el valor de este atributo se alterna entre 0 y 1.</li>
+            <li><strong>self.ganador:</strong> Almacena el símbolo del jugador ganador si ya hay uno. Si no hay ganador aún, su valor es None. Cuando se detecta un ganador, este atributo se actualiza con el símbolo del ganador (ya sea "X" o "O").</li>
         </ul>
 
         <h5>Métodos Clave</h5>
@@ -211,8 +211,9 @@
         </p>
         <ol>
             <li>
-            <strong> Actualizar tablero:</strong> Cada vez que un jugador hace un movimiento, el estado visual del tablero (es decir, el texto de los botones) se actualiza para reflejar los símbolos "X" u "O" en las celdas correspondientes.
-                <p>El método actualizar_tablero se encarga de esta tarea, actualizando los botones con los valores actuales del tablero.</p>
+            <strong> Actualizar_tablero:</strong> Cada vez que un jugador hace un movimiento, el estado visual del tablero (es decir, el texto de los botones) se actualiza para reflejar los símbolos "X" u "O" en las celdas correspondientes.
+                <p><strong>El método actualizar_tablero:</strong>Se encarga de esta tarea, actualizando los botones con los valores actuales del tablero.</p>
+                <p> <strong>El método mover:</strong>Este método maneja el clic del jugador en una casilla. Realiza el movimiento, verifica si hay un ganador o empate, alterna el turno y actualiza el tablero en la interfaz.</p>
             </li>
             <li>
             <strong> Verificación de ganadores o empate: </strong>
